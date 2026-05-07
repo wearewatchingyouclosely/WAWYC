@@ -25,11 +25,12 @@ const socials = [
   }
 ];
 
-export default function App() {
+export default function App({ popupDelayMs = 60000, isTestPage = false }) {
   // Contra code: up up down down left right left right b a
   const contraCode = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
   const [input, setInput] = useState([]);
   const [easterEgg, setEasterEgg] = useState(false);
+  const [showKonamiPrompt, setShowKonamiPrompt] = useState(false);
 
   useEffect(() => {
     function handleKeyDown(e) {
@@ -45,6 +46,23 @@ export default function App() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowKonamiPrompt(true);
+    }, popupDelayMs);
+
+    return () => clearTimeout(timer);
+  }, [popupDelayMs]);
+
+  useEffect(() => {
+    if (!showKonamiPrompt) return;
+    const hideTimer = setTimeout(() => {
+      setShowKonamiPrompt(false);
+    }, 9000);
+
+    return () => clearTimeout(hideTimer);
+  }, [showKonamiPrompt]);
 
   return (
     <div className="cyber-bg">
@@ -68,6 +86,12 @@ export default function App() {
         </div>
       </div>
       <div className="scanlines"></div>
+      <div className={`konami-popup ${showKonamiPrompt ? "visible" : ""}`}>
+        Are you familiar with the Konami Code?
+      </div>
+      {isTestPage && (
+        <div className="test-pill">Test mode: popup accelerated</div>
+      )}
     </div>
   );
 }
