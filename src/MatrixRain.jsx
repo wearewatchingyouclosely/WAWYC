@@ -5,7 +5,7 @@ import { useState } from "react";
 function usePhrases() {
   const [phrases, setPhrases] = useState(["your eyes are not deceiving you"]);
   useEffect(() => {
-    fetch("/src/phrases.txt")
+    fetch("/phrases.txt")
       .then(r => r.text())
       .then(text => {
         setPhrases(text.split("\n").filter(Boolean));
