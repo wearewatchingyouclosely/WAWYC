@@ -55,10 +55,10 @@ export default function MatrixRain() {
     const columns = MESSAGE.length;
     // Find total message width
     const totalWidth = ctx.measureText(MESSAGE).width;
-    // Allow the phrase to hang off left or right edge
-    const minX = -Math.floor(totalWidth * 0.5);
-    const maxX = window.innerWidth - Math.ceil(totalWidth * 0.5);
-    const startX = minX + Math.random() * (maxX - minX);
+    // Ensure the phrase never hangs off the left or right edge
+    const minX = 0;
+    const maxX = window.innerWidth - totalWidth;
+    const startX = minX + Math.random() * Math.max(0, maxX - minX);
     const columnXs = kerning.map(x => x + startX);
     const maxY = window.innerHeight;
 
