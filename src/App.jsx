@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import MatrixRain from "./MatrixRain";
+import MatrixAndKatakanaRain from "./MatrixAndKatakanaRain";
 
 const socials = [
   {
@@ -28,7 +28,7 @@ const socials = [
 export default function App() {
   return (
     <div className="cyber-bg">
-      <MatrixRain />
+      <MatrixAndKatakanaRain />
       <div className="bio-card">
         <h1 className="glitch" data-text="WAWYC">WAWYC</h1>
         <p className="subtitle">wearewatchingyouclosely.net</p>

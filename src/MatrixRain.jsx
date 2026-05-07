@@ -18,7 +18,7 @@ function usePhrases() {
 const FONT_SIZE = 14; // px
 const ROW_SPACING = 1.3; // multiplier for extra vertical space
 const RAIN_SPEED = 125; // ms per frame (25% slower)
-const TRAIL_FADE = 0.37; // opacity for ghosting (15% faster fade)
+const TRAIL_FADE = 0.18; // lower opacity for ghosting so katakana is visible
 
 function getKerningOffsets(ctx, message, fontSize) {
   // Calculate x offsets for each letter based on kerning
@@ -74,7 +74,9 @@ export default function MatrixRain() {
 
     function draw() {
       // Fade old trails
-      ctx.fillStyle = `rgba(15,17,26,${TRAIL_FADE})`;
+      // Fade with a semi-transparent overlay only (no clearRect)
+      // Always use a semi-transparent overlay for fading, never opaque
+      ctx.fillStyle = `rgba(15,17,26,${Math.max(0.01, Math.min(TRAIL_FADE, 0.5))})`;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       let allOff = true;
@@ -115,7 +117,7 @@ export default function MatrixRain() {
         left: 0,
         width: "100vw",
         height: "100vh",
-        zIndex: 0,
+        zIndex: 0, // above katakana, below UI
         pointerEvents: "none"
       }}
       width={window.innerWidth}
