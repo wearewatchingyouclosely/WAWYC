@@ -30,6 +30,28 @@ body, html {
   position: relative;
 }
 
+@media (max-width: 600px) {
+  .bio-card {
+    padding: 1.2rem 0.7rem;
+    max-width: 95vw;
+  }
+  .glitch {
+    font-size: 2rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .socials {
+    gap: 0.7rem;
+    margin-top: 1rem;
+  }
+  .social-link {
+    font-size: 1.1rem;
+    gap: 0.1rem;
+  }
+}
+
 .glitch {
   font-size: 3rem;
   color: #00ffe7;
